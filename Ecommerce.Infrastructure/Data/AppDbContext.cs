@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ecommerce.Domain.Entities;
+﻿using Ecommerce.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Infrastructure.Data
@@ -15,5 +10,6 @@ namespace Ecommerce.Infrastructure.Data
 
         }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

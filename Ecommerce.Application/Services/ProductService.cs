@@ -1,23 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ecommerce.Application.Interfaces;
+﻿using Ecommerce.Application.Interfaces;
 using Ecommerce.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Ecommerce.Application.Services
 {
     public class ProductService : IProductService
     {
-        public async Task<List<Product>> GetAllProductsAsync()
+        private readonly IProductRepository _repo;
+        public ProductService(IProductRepository repo)
         {
-            // temporary fake data
-            return await Task.FromResult(new List<Product>
+            _repo = repo;
+        }
+        public Task<List<Product>> GetAllAsync()
         {
-            new Product { Id = 1, Name = "Laptop", Price = 50000 },
-            new Product { Id = 2, Name = "Mobile", Price = 20000 }
-        });
+            return _repo.GetAllAsync();
+        }
+
+        public Task<Product> GetByIdAsync(int id)
+        {
+            return _repo.GetByIdAsync(id);
+        }
+
+        public Task AddAsync(Product product)
+        {
+            return _repo.AddAsync(product);
         }
     }
 }

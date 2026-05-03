@@ -7,9 +7,9 @@ using Ecommerce.Domain.Entities;
 
 namespace Ecommerce.Application.Interfaces
 {
-   public interface IProductService
-   {
-       Task<List<Product>> GetAllAsync();
+    public  interface IProductRepository
+    {
+        Task<List<Product>> GetAllAsync();
         Task<Product> GetByIdAsync(int id);
         Task AddAsync(Product product);
     }
