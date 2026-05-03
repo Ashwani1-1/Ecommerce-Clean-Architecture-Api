@@ -1,30 +1,38 @@
-﻿using Ecommerce.Application.Interfaces;
+﻿using System;
+using AutoMapper;
+using Ecommerce.Application.DTOs;
+using Ecommerce.Application.Interfaces;
 using Ecommerce.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace Ecommerce.Application.Services
 {
     public class ProductService : IProductService
     {
         private readonly IProductRepository _repo;
-        public ProductService(IProductRepository repo)
+        private readonly IMapper _mapper;
+        public ProductService(IProductRepository repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
-        public Task<List<Product>> GetAllAsync()
+        public async Task<List<Product>> GetAllAsync()
         {
-            return _repo.GetAllAsync();
-        }
-
-        public Task<Product> GetByIdAsync(int id)
-        {
-            return _repo.GetByIdAsync(id);
+            var products = await _repo.GetAllAsync();
+            return _mapper.Map<List<Product>>(products);
         }
 
-        public Task AddAsync(Product product)
+        public async Task<Product> GetByIdAsync(int id)
         {
-            return _repo.AddAsync(product);
+            var product =await _repo.GetByIdAsync(id);
+            return _mapper.Map<Product>(product);
+
+        }
+
+        public async Task AddAsync(CreateProductDto dto)
+        {
+            var product = _mapper.Map<Product>(dto);
+            await _repo.AddAsync(product);
         }
     }
 }

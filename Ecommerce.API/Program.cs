@@ -1,8 +1,10 @@
+using System.Reflection;
 using Ecommerce.Application.Interfaces;
+using Ecommerce.Application.Mappings;
 using Ecommerce.Application.Services;
 using Ecommerce.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
 using Ecommerce.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly); 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 var app = builder.Build();

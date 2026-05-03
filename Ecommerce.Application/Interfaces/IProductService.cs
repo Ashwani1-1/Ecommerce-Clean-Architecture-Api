@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ecommerce.Application.DTOs;
 using Ecommerce.Domain.Entities;
 
 namespace Ecommerce.Application.Interfaces
@@ -11,6 +12,6 @@ namespace Ecommerce.Application.Interfaces
    {
        Task<List<Product>> GetAllAsync();
         Task<Product> GetByIdAsync(int id);
-        Task AddAsync(Product product);
+        Task AddAsync(CreateProductDto dto);
     }
 }

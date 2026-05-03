@@ -1,4 +1,5 @@
-﻿using Ecommerce.Application.Interfaces;
+﻿using Ecommerce.Application.DTOs;
+using Ecommerce.Application.Interfaces;
 using Ecommerce.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,13 +18,14 @@ namespace Ecommerce.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _service.GetAllAsync());
+            var result = await _service.GetAllAsync();
+            return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Product product)
+        public async Task<IActionResult> Create(CreateProductDto dto)
         {
-            await _service.AddAsync(product);
+            await _service.AddAsync(dto);
             return Ok("Product created");
         }
     }
