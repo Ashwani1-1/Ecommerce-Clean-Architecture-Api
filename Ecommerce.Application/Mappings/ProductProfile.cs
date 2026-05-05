@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Ecommerce.Application.DTOs;
 using Ecommerce.Domain.Entities;
-using AutoMapper;
 namespace Ecommerce.Application.Mappings
 {
     public class ProductProfile : Profile
